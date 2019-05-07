@@ -5,8 +5,7 @@ class DocumentsController < ApplicationController
 		@documents = Document.all.order('created_at DESC')
 	end
 
-	def show
-		
+	def show		
 	end
 
 	def new
@@ -27,9 +26,16 @@ class DocumentsController < ApplicationController
 	end
 
 	def update
+		if @document.update(document_params)
+			redirect_to @document
+		else
+			render 'edit'
+		end
 	end
 
 	def destroy
+		@document.destroy
+		redirect_to documents_path
 	end
 
 	private
